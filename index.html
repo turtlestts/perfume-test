@@ -29,7 +29,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
-            width: 400px;
+            width: 440px;
             min-height: 250px;
             display: flex;
             flex-direction: column;
@@ -92,21 +92,37 @@
             align-items: center;
             justify-content: space-between;
             margin: 15px 0;
-            padding: 10px;
+            padding: 12px;
             border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .result-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .result-info .kv {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .result-info .pf {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .result-info .pf span {
+            color: #e67e22; /* 향수 이름 오렌지색 강조 */
         }
 
         .result-item img {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 8px;
             object-fit: cover;
-        }
-
-        .result-item span {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
         }
 
         .hidden {
@@ -121,7 +137,7 @@
             }
 
             .container {
-                width: 90%; /* 폰 화면 좌우에 꽉 차기 위해 비율로 설정 */
+                width: 92%; /* 폰 화면 좌우에 꽉 차기 위해 비율로 설정 */
                 padding: 20px;
                 min-height: 280px;
             }
@@ -129,6 +145,7 @@
             h1 { font-size: 20px; }
             .keyword { font-size: 26px; }
             button { padding: 10px 24px; font-size: 16px; }
+            .result-info .pf { font-size: 16px; }
         }
     </style>
 </head>
@@ -145,19 +162,40 @@
         </div>
 
         <div id="result-screen" class="hidden">
-            <h1>내가 '예'를 선택한 키워드</h1>
+            <h1>나에게 어울리는 강릉 향수</h1>
             <div id="result-list"></div>
             <button class="btn-retry" onclick="resetQuiz()">다시하기</button>
         </div>
     </div>
 
     <script>
+        // 키워드별 추천 향수 매칭 데이터 설정
         const data = [
-            { keyword: "차분함, 고요함", image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300" },
-            { keyword: "바닷바람", image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=300" },
-            { keyword: "헤이즐넛 커피", image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=300" },
-            { keyword: "베이비 파우더", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=300" },
-            { keyword: "소나무 숲길", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=300" }
+            { 
+                keyword: "차분함, 고요함", 
+                perfume: "하슬라", 
+                image: "haslla.png" 
+            },
+            { 
+                keyword: "바닷바람", 
+                perfume: "경포", 
+                image: "gyeongpo.png" 
+            },
+            { 
+                keyword: "헤이즐넛 커피", 
+                perfume: "안목", 
+                image: "anmok.png" 
+            },
+            { 
+                keyword: "베이비 파우더", 
+                perfume: "초당", 
+                image: "chodang.png" 
+            },
+            { 
+                keyword: "소나무 숲길", 
+                perfume: "강문", 
+                image: "gangmun.png" 
+            }
         ];
 
         let currentIndex = 0;
@@ -188,7 +226,7 @@
             resultList.innerHTML = ""; 
             
             if (selectedKeywords.length === 0) {
-                resultList.innerHTML = "<p style='color:#777;'>선택한 키워드가 없습니다.</p>";
+                resultList.innerHTML = "<p style='color:#777; margin: 30px 0;'>선택한 키워드가 없습니다.<br>다시 테스트해보세요!</p>";
                 return;
             }
 
@@ -196,7 +234,10 @@
                 const div = document.createElement("div");
                 div.className = "result-item";
                 div.innerHTML = `
-                    <span>${item.keyword}</span>
+                    <div class="result-info">
+                        <span class="kv">선택 키워드: ${item.keyword}</span>
+                        <span class="pf">추천 향수: <span>'${item.perfume}'</span></span>
+                    </div>
                     <img src="${item.image}" alt="${item.keyword}">
                 `;
                 resultList.appendChild(div);
