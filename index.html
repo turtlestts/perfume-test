@@ -14,8 +14,8 @@
             align-items: center;
             height: 100vh;
             
-            /* 이미지 배경 설정 */
-            background-image: url('images/bg.jpg'); /* 제공된 이미지 파일 주소 */
+            /* 이미지 배경 설정 (index.html과 같은 위치에 있을 때) */
+            background-image: url('bg.png'); 
             background-size: cover;          /* 화면 전체를 꽉 채우도록 크기 조절 */
             background-position: center;     /* 배경 이미지를 정중앙에 위치 */
             background-repeat: no-repeat;    /* 이미지가 바둑판식으로 반복되지 않게 설정 */
@@ -116,10 +116,8 @@
         /* 📱 모바일 화면 (세로가 긴 스마트폰 화면) 최적화 스타일 추가 */
         @media (max-width: 480px) {
             body {
-                /* 모바일 화면에서는 인물이 조금 더 잘 보이도록 배경 중심축을 오른쪽(right)이나 살짝 조정 가능 */
-                background-position: 65% center; 
-                /* iOS 등 일부 모바일 브라우저에서 배경 튕김/밀림 현상을 방지하기 위해 scroll로 변경 */
-                background-attachment: scroll; 
+                background-position: 65% center; /* 모바일 화면에서 인물이 잘 보이도록 세팅 */
+                background-attachment: scroll; /* 모바일 브라우저 튕김 현상 방지 */
             }
 
             .container {
@@ -128,18 +126,9 @@
                 min-height: 280px;
             }
 
-            h1 {
-                font-size: 20px; /* 모바일 전용 글씨 크기 축소 */
-            }
-
-            .keyword {
-                font-size: 26px; /* 모바일 전용 글씨 크기 축소 */
-            }
-
-            button {
-                padding: 10px 24px;
-                font-size: 16px;
-            }
+            h1 { font-size: 20px; }
+            .keyword { font-size: 26px; }
+            button { padding: 10px 24px; font-size: 16px; }
         }
     </style>
 </head>
